@@ -4,7 +4,6 @@ Created on Wed Sep 18 15:37:34 2013
 
 @author: santosh
 """
-from importlib.resources import read_text
 import os,csv, numpy as np, copy, scipy as sp, math, pprint,sys,inspect
 import matplotlib.pyplot as plt
 plt.ion()
@@ -14,12 +13,10 @@ import matplotlib.cm as cm
 from matplotlib import colors
 import pickle
 import time
-# import tkMessageBox
+import tkMessageBox
 import shutil
 
-def residuals(params,xdata,ydata): 
-    res = sum((np.abs(ydata-linpiecewise(params,xdata))/ydata)**2) 
-    return res
+def residuals(params,xdata,ydata): return sum((np.abs(ydata-linpiecewise(params,xdata))/ydata)**2)
 #Division by ydata is to ensure that errors at low absorbance values are given high importance and the ones
 #at higher absorbance values are given lower importance (since the important region is where the absorbance starts increasing
 #from low value prior to band gap to higher values...The noise at very high energy levels usually having high absorbance will not 
@@ -30,10 +27,10 @@ def residuals(params,xdata,ydata):
 #to slopes for the linear regions.  Piecewise linear addition to obtain the value of fitdata at a specific value of x. 
 def linpiecewise(params,x):
     fitdata=np.ones(np.shape(x))*params[0]
-    num_knots=int(len(params)/2)
-
+    num_knots=len(params)/2
     for loc in np.arange(1,num_knots):
-        fitdata+=params[num_knots+loc]*(x>=params[loc])*(np.min(np.array([np.ones(np.shape(x))*params[loc+1],x]),axis=0)-params[loc])
+        fitdata+=params[num_knots+loc]*(x>=params[loc])*(np.min(np.array(\
+        [np.ones(np.shape(x))*params[loc+1],x]),axis=0)-params[loc])
     return fitdata    
     
 
@@ -52,10 +49,10 @@ def linearfit(xdata,ydata,num_knots,min_knotdist,xorder,options,tol):
         init_x=np.hstack((init_x,xdata[-1]))
     else:
         init_x[-1]=xdata[-1]
-    init_idxs=[np.argmin(np.abs(xdata-init_x[loc])) for loc in range(np.size(init_x))]
-    init_slopes=[(ydata[init_idxs[loc+1]]-ydata[init_idxs[loc]])/(xdata[init_idxs[loc+1]]-xdata[init_idxs[loc]]) for loc in range(0,len(init_idxs)-1)]
+    init_idxs=[np.argmin(np.abs(xdata-init_x[loc])) for loc in xrange(np.size(init_x))]
+    init_slopes=[(ydata[init_idxs[loc+1]]-ydata[init_idxs[loc]])/(xdata[init_idxs[loc+1]]-xdata[init_idxs[loc]]) for loc in xrange(0,len(init_idxs)-1)]
     init_params=np.hstack((ydata[0],init_x,init_slopes))
-    res = sp.optimize.minimize(residuals, init_params, args=(xdata,ydata), constraints=cons, method='SLSQP', options=options, tol=tol)
+    res = sp.optimize.minimize(residuals,init_params, args=(xdata,ydata),constraints=cons, method='SLSQP',options=options,tol=tol)
     return res
     
 def mergelinsegs(params,num_knots,max_merge_differentialTP,merge_linsegslopediff_percent):
@@ -72,8 +69,9 @@ def mergelinsegs(params,num_knots,max_merge_differentialTP,merge_linsegslopediff
         newknots=np.empty(np.shape(knots)[0])
         newslopes[0]=slopes[0]
         newknots[0:2]=knots[0:2]
-        while loc < np.shape(slopes)[0]-1:
-            medianslope=(newslopes[j]*(newknots[j+1]-newknots[j])+slopes[loc+1]*(knots[loc+2]-knots[loc+1]))/(knots[loc+2]-newknots[j])
+        while loc <np.shape(slopes)[0]-1:
+            medianslope=(newslopes[j]*(newknots[j+1]-newknots[j])+slopes[loc+1]*(knots[loc+2]-knots[loc+1]))\
+            /(knots[loc+2]-newknots[j])
             differentialTPdiff=(medianslope-newslopes[j])*(newknots[j+1]-newknots[j])
             TPdiff=newslopes[j]*(newknots[j+1]-newknots[j])
             TPdiffn=slopes[loc+1]*(knots[loc+2]-knots[loc+1])
@@ -109,17 +107,14 @@ merge_linsegslopediff_percent,maxtol,min_knotdist=0.05,xorder='increasing',dispr
     linfitd={}
     yoffset=-np.min(data[bgtyp])+0.03 if np.min(data[bgtyp])<0.03 else 0
     for maxiter in [1000,2000]:
-        new_offset = [x+yoffset for x in data[bgtyp]]
-        res=linearfit(data['hv'],new_offset,num_knots,min_knotdist,xorder,{'maxiter':maxiter,'disp':dispresult},tol)
-
+        res=linearfit(data['hv'],data[bgtyp]+yoffset,num_knots,min_knotdist,xorder,{'maxiter':maxiter,'disp':dispresult},tol)
         if res.success:
             break
     if not res.success:
         maxiter=2000
-        for i in range(int(np.log10(tol)),int(np.log10(maxtol))+1,-1):
+        for i in xrange(int(np.log10(tol)),int(np.log10(maxtol))+1,-1):
             newtol=10.**i
-            new_offset = [x+yoffset for x in data[bgtyp]]
-            res=linearfit(data['hv'],new_offset,num_knots,min_knotdist,xorder,{'maxiter':maxiter,'disp':dispresult},newtol)
+            res=linearfit(data['hv'],data[bgtyp]+yoffset,num_knots,min_knotdist,xorder,{'maxiter':maxiter,'disp':dispresult},newtol)
             if res.success:
                 break
     if not res.success:
@@ -128,13 +123,14 @@ merge_linsegslopediff_percent,maxtol,min_knotdist=0.05,xorder='increasing',dispr
         tempparams=res.x             
         tempparams[0]-=yoffset
         tempparams=mergelinsegs(tempparams,num_knots,max_merge_differentialTP,merge_linsegslopediff_percent)
-        linfitd,fomd=calc_bandgap(tempparams,np.size(tempparams)/2,max_numbgs,min_allowedslope,min_bgTP_diff,min_bkgrdslope,min_bgbkgrdslopediff,min_finseglength,min_bgTP_finseg_diff,min_bgfinalseglength,bgtyp)
+        linfitd,fomd=calc_bandgap(tempparams,np.size(tempparams)/2,max_numbgs,min_allowedslope,\
+        min_bgTP_diff,min_bkgrdslope,min_bgbkgrdslopediff,min_finseglength,\
+        min_bgTP_finseg_diff,min_bgfinalseglength,bgtyp)
         data[bgtyp+'_linfit']=linpiecewise(np.concatenate(([linfitd['y0']],linfitd['knots'],linfitd['slopes']),axis=0),data['hv'])
     return [linfitd,fomd]
             
 def calc_bandgap(params,num_knots,max_numbgs,min_allowedslope,min_bgTP_diff,min_bkgrdslope,min_bgbkgrdslopediff,\
 min_finseglength,min_bgTP_finseg_diff ,min_bgfinalseglength,bgtyp):
-    num_knots = int(num_knots)
     knots=params[1:num_knots+1]
     slopes=params[num_knots+1:2*num_knots]
     num_slopes=np.shape(slopes)[0]
@@ -203,15 +199,16 @@ min_finseglength,min_bgTP_finseg_diff ,min_bgfinalseglength,bgtyp):
     
         if np.size(bgknots_lower)!=0:
             if not (np.size(bgcode)==1 and bgcode[0]==1):
+    
                 if not (((np.size(abs_expl)==np.size(bgknots_lower)) and (np.size(bgknots_lower)==np.size(bkgrdknots_lower))) and (np.size(np.array(bgcode)[np.where(np.not_equal(bgcode,1))[0]])==np.size(bkgrdknots_lower))):
                     raise ValueError('abs_expl,bgknots_lower,bgcodes and bkgrdknots_lower do not have the same size')
             for i in np.arange(0,np.shape(bkgrdknots_lower)[0]):
                 if (slopes[bgknots_lower[i]]-slopes[bkgrdknots_lower[i]])<min_bgbkgrdslopediff:
                     bgknots_lower[i],bkgrdknots_lower[i],abs_expl[i]=-1000*np.ones([3,])
                     bgcode.extend([4])
-            bgknots_lower=list(filter(lambda a: (a != -1000), bgknots_lower))
-            bkgrdknots_lower=list(filter(lambda a: (a != -1000), bkgrdknots_lower))
-            abs_expl=list(filter(lambda a: (a != -1000), abs_expl))
+            bgknots_lower=filter(lambda a: a != -1000, bgknots_lower)
+            bkgrdknots_lower=filter(lambda a: a != -1000, bkgrdknots_lower)
+            abs_expl=filter(lambda a: a != -1000, abs_expl)
     
             if np.size(bgknots_lower)==0:
                 bgknots_lower,bkgrdknots_lower,bg,abs_expl=np.ones([4,1])*np.NaN
@@ -222,6 +219,7 @@ min_finseglength,min_bgTP_finseg_diff ,min_bgfinalseglength,bgtyp):
                     [m1,m2]=[slopes[bgknots_lower[i]],slopes[bkgrdknots_lower[i]]]
                     [x1,x2]=[knots[bgknots_lower[i]],knots[bkgrdknots_lower[i]]]
                     bg.extend([(y1-y2-(m1*x1-m2*x2))/(m2-m1)])
+                    
         else:
             bgknots_lower,bkgrdknots_lower,bg,abs_expl=np.ones([4,1])*np.NaN        
             bgcode.extend([3])
@@ -230,24 +228,15 @@ min_finseglength,min_bgTP_finseg_diff ,min_bgfinalseglength,bgtyp):
             bgknots_lower,bkgrdknots_lower,bg,abs_expl=np.ones([4,1])*np.NaN        
             bgcode.extend([1])
 
-    # fomd=dict([(lstk+'_'+str(idx),eval(lstk)[idx]) for lstk in ['bgknots_lower', 'bkgrdknots_lower', 'bg','abs_expl','bgcode'] for idx in range(min(len(bg),max_numbgs))])
-    fomd = dict()
-    for lstk in ['bgknots_lower', 'bkgrdknots_lower', 'bg','abs_expl','bgcode']:
-        for idx in range(min(len(eval(lstk)),max_numbgs)):
-            fomd.update([(lstk+'_'+str(idx),eval(lstk)[idx])])
-            
-    # linfitd=dict([(lstk+'_'+str(idx),eval(lstk)[idx]) for lstk in ['bgknots_lower', 'bkgrdknots_lower'] for idx in range(min(len(bg),max_numbgs))]+[('knots',knots),('slopes',slopes),('y0',params[0])])
-    linfitd = dict()
-    for lstk in ['bgknots_lower', 'bkgrdknots_lower']:
-        for idx in range(min(len(eval(lstk)),max_numbgs)):
-            linfitd.update([(lstk+'_'+str(idx),eval(lstk)[idx])])
-    linfitd.update([('knots',knots)])
-    linfitd.update([('slopes',slopes)])
-    linfitd.update([('y0',params[0])])
+    fomd=dict([(lstk+'_'+str(idx),eval(lstk)[idx]) for lstk in ['bgknots_lower', \
+    'bkgrdknots_lower', 'bg','abs_expl','bgcode'] for idx in xrange(min(len(bg),max_numbgs))])
 
+    linfitd=dict([(lstk+'_'+str(idx),eval(lstk)[idx]) for lstk in ['bgknots_lower', \
+    'bkgrdknots_lower'] for idx in xrange(min(len(bg),max_numbgs))]+[('knots',knots),\
+    ('slopes',slopes),('y0',params[0])])
     if not np.isnan(abs_expl).all():
         x=np.argmax([fomd['abs_expl_'+str(idx)] for idx\
-        in range(min(len(bg),max_numbgs)) if not np.isnan(fomd['abs_expl_'+str(idx)])])
+        in xrange(min(len(bg),max_numbgs)) if not np.isnan(fomd['abs_expl_'+str(idx)])])
         fomd['bg_repr']=fomd['bg_'+str(x)]
         fomd['bgslope_repr']=slopes[bgknots_lower[x]]
         fomd['bkgrdslope_repr']=slopes[bkgrdknots_lower[x]]
@@ -263,8 +252,9 @@ min_finseglength,min_bgTP_finseg_diff ,min_bgfinalseglength,bgtyp):
     
 
     
-def identifypeaks(data,typ,abs_minallowedslope,max_allowed_2ndderiv):
-    return len(np.where(np.logical_and((np.abs(data[typ+'_2ndderiv'])>=max_allowed_2ndderiv),(np.abs(data[typ+'_1stderiv'])<=abs_minallowedslope)))[0])>0
+def identifypeaks(data,typ,abs_minallowedslope,max_allowed_2ndderiv):\
+return len(np.where(np.logical_and((np.abs(data[typ+'_2ndderiv'])>=max_allowed_2ndderiv),\
+(np.abs(data[typ+'_1stderiv'])<=abs_minallowedslope)))[0])>0
 
 
 def runuvvis(data,inputvars):
@@ -293,7 +283,7 @@ def runuvvis(data,inputvars):
                 pfomd[bgtyp]['bgcode_0']=7
                 continue
         plinfitd[bgtyp],pfomd[bgtyp]=fitresult(data,bgtyp,max_numbgs=inputvars['maxbgspersmp'],\
-        num_knots=int(inputvars['num_knots']),tol=inputvars['tol'],min_allowedslope=inputvars['min_allowedslope'],\
+        num_knots=inputvars['num_knots'],tol=inputvars['tol'],min_allowedslope=inputvars['min_allowedslope'],\
         min_bgTP_diff=inputvars['min_bgTP_diff'],min_bkgrdslope=inputvars['min_bkgrdslope'],\
         min_bgbkgrdslopediff=inputvars['min_bgbkgrdslopediff'],min_finseglength=inputvars['min_finseglength'],\
         min_bgTP_finseg_diff=inputvars['min_bgTP_finseg_diff'],\
@@ -302,51 +292,8 @@ def runuvvis(data,inputvars):
         min_knotdist=inputvars['min_knotdist'],xorder='increasing',dispresult=False)
         
     fomd=dict([(bgtyp+'_'+k,pfomd[bgtyp][k]) for bgtyp in pfomd.keys() for k in pfomd[bgtyp].keys()])
-
     linfitd=dict([(bgtyp+'_'+k,plinfitd[bgtyp][k]) for bgtyp in plinfitd.keys() for k in plinfitd[bgtyp].keys()])
-
-    for k in linfitd.keys():
-        if k.split('_')[-1] in ['knots','slopes']:
-            for idx,x in enumerate(range(len(linfitd[k]))):
-                index = idx
-                str = x
-                # linfitd=dict(linfitd.items()+[(k+'_'+str(x),linfitd[k][idx])])
-
-
-    # linfitd=dict(linfitd.items()+[(k+'_'+str(x),linfitd[k][idx]) for k in linfitd.keys() if k.split('_')[-1] in ['knots','slopes'] for idx,x in enumerate(range(len(linfitd[k])))])
-
+    linfitd=dict(linfitd.items()+[(k+'_'+str(x),linfitd[k][idx]) for k in linfitd.keys() if k.split('_')[-1] in ['knots','slopes'] \
+    for idx,x in enumerate(xrange(len(linfitd[k])))])
     [linfitd.pop(k) for k in linfitd.keys() if not np.isscalar(linfitd[k])]
-
     return linfitd,fomd
-
-inputparmasd = dict([('lower_wl',390),('upper_wl',940), 
-#data params
-('num_knots',8),('min_knotdist',0.05),('tol',1e-06),('maxtol',1e-03),
-#fitting params
-('merge_linsegslopediff_percent',10.),('max_merge_differentialTP',10000.),
-#params for merging linsegs
-('min_allowedslope',-2),('min_finseglength',0.1),
-#parameters before entering bg identification
-('min_bgTP_diff',0.1),('min_bkgrdslope',-0.05),('min_bgbkgrdslopediff',0.2),('min_bgTP_finseg_diff',0.2),('min_bgfinalseglength',0.2),
-#params for bg and bkgrd
-('analysis_types',('DA','IA')),('maxbgspersmp',4),('chkoutput_types',('DA','IA')),
-('abs_minallowedslope',-np.inf),('max_absolute_2ndderiv',np.inf),('use_absderivs_forpeaks',False)
-#Params for using derivates of absorption spectrum to identify peaks
-])
-
-energy, da, ia = [], [], []
-
-with open('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\UVVISTEST.csv', 'r') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',',)
-    line_count = 1
-    for row in csv_reader:
-        if line_count == 1 or line_count == 2:
-            row = ""
-            line_count += 1
-            continue
-        energy.append(float(row[6]))
-        ia.append(float(row[7]))
-        da.append(float(row[2]))
-        
-datad = dict([('hv',energy),('DA',da),('IA',ia)])
-runuvvis(datad,inputparmasd)

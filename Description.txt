@@ -1,0 +1,31 @@
+The algorithm partitions the Tauc plot into a series of linear segments and then identifies the linear segment most representative of the Tauc relationship based on the energy ranges, Tauc value ranges, and Tauc slopes of the line segments. 
+
+
+Run uvvis:
+Checks if there are any nan values or if peaks exist (what does this entail?) for each analysis type (indirect allowed (IA) and direct allowed (DA) transitions)
+Then always runs fitresult
+
+Run fitresult:
+Creates data for each bg type and interacts with fitting, residual measurement functions to identify the best linear piecewise parameters which are then sent to calc_bandgap for bandgap calculations.
+Uses the linearfit function
+Then if evertyhing was successful, it passes paramters to mergelinsegs which merges each linear segment to best fit Tauc fit. Then calc_bandgap is called and linpiecewise shortly after
+
+Run linearfit(lsqcurvefitting):
+Determines proper slope direction while determining the constraints, and initial paramters like x0 and its index, initial slope and the first value of y. 
+This is passed into a constrained lsqcurvefitting internal function
+
+Run mergelinsegs:
+Compares neighbouring linear segments and their slopes that meet a certain criteria and then merges them:
+δi,merge < p3(Δ(TP)i + Δ(TP)i+1), i ∈ [1,k]
+Returns the parameters for th calc_bandgap function --> params = [params(1,1);knots;slopes];
+
+Run calc_bandgap:
+Calculates Eg from the (ahv = k * (hv - Eg)^n) relationship
+Implements constrained piecewise linear fitting from linpiecewise function
+
+Run linpiecewise: 
+Piecewise linear addition to obtain the value of fitdata at a specific value of x. 
+
+
+linfitd is a map with information regarding optimized linear fit paramters
+fomd is a map with figure-of-merit values.
