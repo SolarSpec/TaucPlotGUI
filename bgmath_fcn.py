@@ -362,8 +362,8 @@ energy, da, ia, fitda, fitia = [], [], [], [], []
 #         fitda.append(float(row[23]))
 #         fitia.append(float(row[24]))
 
-Wavelength = pd.read_excel('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\Test Data\\Cut_Absorption_7th DMF Wash (Methyl red hydrochloride-CNx in THF).xlsx', usecols='A')
-Absorption = pd.read_excel('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\Test Data\\Cut_Absorption_7th DMF Wash (Methyl red hydrochloride-CNx in THF).xlsx', usecols='B')
+Wavelength = pd.read_excel('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\Test Data\\Cut_Cut_Absorption_7th DMF Wash (Methyl red hydrochloride-CNx in THF).xlsx', usecols='A')
+Absorption = pd.read_excel('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\Test Data\\Cut_Cut_Absorption_7th DMF Wash (Methyl red hydrochloride-CNx in THF).xlsx', usecols='B')
 h = 6.62607015e-34
 c = 299792458
 
