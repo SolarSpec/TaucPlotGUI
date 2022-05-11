@@ -17,16 +17,22 @@ import time
 # import tkMessageBox
 import shutil
 
+import pandas as pd
+from pathlib import Path
+
 def residuals(params,xdata,ydata): 
-    res = sum((np.abs(ydata-linpiecewise(params,xdata))/ydata)**2) 
-    return res
+    resid = sum((np.abs(ydata-linpiecewise(params,xdata))/ydata)**2)
+
+    # resid = sum((np.abs(ydata-linpiecewise(params,xdata)))**2)
+
+    return resid # breakpoint hitcount = 524
 #Division by ydata is to ensure that errors at low absorbance values are given high importance and the ones
 #at higher absorbance values are given lower importance (since the important region is where the absorbance starts increasing
 #from low value prior to band gap to higher values...The noise at very high energy levels usually having high absorbance will not 
 #effect the quality of the result a lot)
 
    
-# params: zeroth index corresponds to the yfit value at x=x0. Next num_knots indices correspond to the knot positions. Next num_knots-1 indices correspond
+#params: zeroth index corresponds to the yfit value at x=x0. Next num_knots indices correspond to the knot positions. Next num_knots-1 indices correspond
 #to slopes for the linear regions.  Piecewise linear addition to obtain the value of fitdata at a specific value of x. 
 def linpiecewise(params,x):
     fitdata=np.ones(np.shape(x))*params[0]
@@ -52,6 +58,8 @@ def linearfit(xdata,ydata,num_knots,min_knotdist,xorder,options,tol):
         init_x=np.hstack((init_x,xdata[-1]))
     else:
         init_x[-1]=xdata[-1]
+
+ 
     init_idxs=[np.argmin(np.abs(xdata-init_x[loc])) for loc in range(np.size(init_x))]
     init_slopes=[(ydata[init_idxs[loc+1]]-ydata[init_idxs[loc]])/(xdata[init_idxs[loc+1]]-xdata[init_idxs[loc]]) for loc in range(0,len(init_idxs)-1)]
     init_params=np.hstack((ydata[0],init_x,init_slopes))
@@ -108,10 +116,9 @@ min_finseglength,min_bgTP_finseg_diff,min_bgfinalseglength,max_merge_differentia
 merge_linsegslopediff_percent,maxtol,min_knotdist=0.05,xorder='increasing',dispresult=False):
     linfitd={}
     yoffset=-np.min(data[bgtyp])+0.03 if np.min(data[bgtyp])<0.03 else 0
-    for maxiter in [1000,2000]:
+    for maxiter in [1000,10000]:
         new_offset = [x+yoffset for x in data[bgtyp]]
         res=linearfit(data['hv'],new_offset,num_knots,min_knotdist,xorder,{'maxiter':maxiter,'disp':dispresult},tol)
-
         if res.success:
             break
     if not res.success:
@@ -305,17 +312,22 @@ def runuvvis(data,inputvars):
 
     linfitd=dict([(bgtyp+'_'+k,plinfitd[bgtyp][k]) for bgtyp in plinfitd.keys() for k in plinfitd[bgtyp].keys()])
 
-    for k in linfitd.keys():
+    for k in list(linfitd.keys()):
         if k.split('_')[-1] in ['knots','slopes']:
             for idx,x in enumerate(range(len(linfitd[k]))):
-                index = idx
-                str = x
                 # linfitd=dict(linfitd.items()+[(k+'_'+str(x),linfitd[k][idx])])
+                linfitd[k+'_'+str(x)] = linfitd[k][idx]
 
 
     # linfitd=dict(linfitd.items()+[(k+'_'+str(x),linfitd[k][idx]) for k in linfitd.keys() if k.split('_')[-1] in ['knots','slopes'] for idx,x in enumerate(range(len(linfitd[k])))])
 
-    [linfitd.pop(k) for k in linfitd.keys() if not np.isscalar(linfitd[k])]
+    # [linfitd.pop(k) for k in linfitd.keys() if not np.isscalar(linfitd[k])]
+    for k in list(linfitd.keys()):
+        if not np.isscalar(linfitd[k]):
+            linfitd.pop(k)
+
+    plt.plot(data['hv'],data['DA_linfit'])
+    plt.plot(data['hv'],data['IA_linfit'])
 
     return linfitd,fomd
 
@@ -334,19 +346,48 @@ inputparmasd = dict([('lower_wl',390),('upper_wl',940),
 #Params for using derivates of absorption spectrum to identify peaks
 ])
 
-energy, da, ia = [], [], []
+energy, da, ia, fitda, fitia = [], [], [], [], []
 
-with open('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\UVVISTEST.csv', 'r') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',',)
-    line_count = 1
-    for row in csv_reader:
-        if line_count == 1 or line_count == 2:
-            row = ""
-            line_count += 1
-            continue
-        energy.append(float(row[6]))
-        ia.append(float(row[7]))
-        da.append(float(row[2]))
-        
+# with open('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\Test Data\\UVVISTEST.csv', 'r') as csv_file:
+#     csv_reader = csv.reader(csv_file, delimiter=',',)
+#     line_count = 1
+#     for row in csv_reader:
+#         if line_count == 1 or line_count == 2:
+#             row = ""
+#             line_count += 1
+#             continue
+#         energy.append(float(row[6]))
+#         ia.append(float(row[7]))
+#         da.append(float(row[2]))
+#         fitda.append(float(row[23]))
+#         fitia.append(float(row[24]))
+
+Wavelength = pd.read_excel('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\Test Data\\Cut_Absorption_7th DMF Wash (Methyl red hydrochloride-CNx in THF).xlsx', usecols='A')
+Absorption = pd.read_excel('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\Test Data\\Cut_Absorption_7th DMF Wash (Methyl red hydrochloride-CNx in THF).xlsx', usecols='B')
+h = 6.62607015e-34
+c = 299792458
+
+XDATA = np.array([a[0] for a in Wavelength.values])
+YDATA = np.array([a[0] for a in Absorption.values])
+
+# Normalize YDATA
+normY = max(YDATA)
+YDATA = YDATA/normY
+
+joules = (h*c)/(XDATA*1e-9)
+energy = joules*6.242e18
+TaucY = (YDATA)*energy
+
+da = TaucY**2
+normD = max(da)
+da = da/normD
+
+ia = TaucY**(1/2)
+normI = max(ia)
+ia = ia/normI
+
 datad = dict([('hv',energy),('DA',da),('IA',ia)])
+
+plt.plot(energy,da)
+plt.plot(energy,ia)
 runuvvis(datad,inputparmasd)
