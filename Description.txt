@@ -1,5 +1,10 @@
 The algorithm partitions the Tauc plot into a series of linear segments and then identifies the linear segment most representative of the Tauc relationship based on the energy ranges, Tauc value ranges, and Tauc slopes of the line segments. 
 
+"We build intuitive parameters into the algorithm to mimic an expert scientist’s judgment so that absorption spectra that do not conclusively identify a band gap are flagged, and the band gap energy is calculated for the remaining samples."
+
+"While the algorithm has several free parameters, we used expert researchers to train the values of these parameters and demonstrate that the presented values yield an algorithm with excellent reproducibility and ability to estimate band gap energies from both diffuse reflectance and transmission–reflection measurements. The intuitive nature of the free parameters allows further fine-tuning of the accuracy and tailoring to specific experiments when necessary."
+
+
 
 Run uvvis:
 Checks if there are any nan values or if peaks exist (what does this entail?) for each analysis type (indirect allowed (IA) and direct allowed (DA) transitions)
