@@ -116,6 +116,22 @@ Click on the "Add-Ons" dropdown menu of your MATLAB Home screen. Then click on "
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+Expert Scientist Guidelines for Band Gap Estimation:
+If multiple band gaps are observed, estimate band gap using the Tauc regions that explains 
+higher proportion of Tauc property change.
+
+
+In cases where a clear baseline is not observed but a trend for transition between the baseline 
+and the absorption tail is observed, estimate band gap using best approximation of baseline.
+
+
+Do not estimate a band gap when neither a clear baseline nor a trend for transition between the 
+baseline and the absorption tail are observed.
+
+
+Do not estimate band gap when only a lower limit of the band gap energy can be determined (due 
+to the absorption transient extending beyond the high-energy limit of the spectrometer).
+
 <!-- Here is a simple example of the app used on a small dataset. The filtering is turned on and we'd like to export all the kinetics data by clicking the "Export CSV Data" button. We can view where the file was saved in the text on the left panel and can then open the CSV file to view the data.
 
 _Please note that the bottom of each CSV contains an extra row of information attributed to the BackgroundLevel data of each TDMS file. This is simply a convention to carry this data if it is loaded back into the PIAS app. If one does not intend to load it back into the app, you may delete this row or store the variables somewhere else in the CSV as to not lose it for future use._

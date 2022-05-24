@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import re
 import scipy.signal
 
-
 def linregress(x,y):
     '''
     This function computes a basic linear regression when given x and y data.
@@ -43,8 +42,6 @@ def linregress(x,y):
 #    R_squared=1-(SSres/SStot)
     x_intercept = -intercept/slope
     return slope, intercept, R_squared, x_intercept
-
-
 
 def santosh_newhouse_gregoire_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True):
     return 'This method has not yet been given permission to be used.'
@@ -224,7 +221,6 @@ def segmentation_method(energy,absorption_coefficient,bg_type ='direct',show_gra
         print("Empty Sequence!")
         return
 
-
 def mars_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True):
     direct_abs_corrected = absorption_coefficient
     t = []
@@ -294,7 +290,7 @@ def mars_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True)
 
     line_segs = sorted(line_segs,key=lambda item:item[5])
 #            print(line_segs)
-    winner = max(line_segs,key=lambda item:item[5])
+    winner = max(line_segs,key=lambda item:item[5]) #DEBUG HERE TO CHECK DIFFERENCE IN MAX
    
     adj_energy=np.linspace(min(energy),max(energy),num=1000)
     adj_winner = []
