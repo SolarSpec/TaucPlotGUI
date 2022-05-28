@@ -3,6 +3,7 @@ from pyearth import Earth,export
 import matplotlib.pyplot as plt
 import re
 import scipy.signal
+import pandas as pd
 
 def linregress(x,y):
     '''
@@ -228,7 +229,7 @@ def mars_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True)
         t.append(k/(max(direct_abs_corrected)))
     direct_abs_corrected=t
     
-    model = Earth()
+    model = Earth(max_terms=21,thresh=1e-4,verbose=2)#,max_degree=3)
     try:
         model.fit(np.array(energy), np.array(direct_abs_corrected))
     except ValueError:
@@ -280,7 +281,7 @@ def mars_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True)
         slope = (elbows_list[point+1][1]-elbows_list[point][1])/(elbows_list[point+1][0]-elbows_list[point][0])
         y_intercept = elbows_list[point+1][1]-slope*elbows_list[point+1][0]
         x_intercept = (-1*y_intercept) / slope
-        weighting_factor = slope**2 * x_length*2 * abs(length)**.5 * num_pts
+        weighting_factor = slope**2 * x_length**(-2) * abs(length)**.5 * num_pts
         try:
             if x_intercept > 0 and slope > 0 and num_pts>10:
                 line_segs.append(tuple([x_length,length,slope,y_intercept,x_intercept,weighting_factor]))
@@ -290,7 +291,7 @@ def mars_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True)
 
     line_segs = sorted(line_segs,key=lambda item:item[5])
 #            print(line_segs)
-    winner = max(line_segs,key=lambda item:item[5]) #DEBUG HERE TO CHECK DIFFERENCE IN MAX
+    winner = max(line_segs,key=lambda item:item[5])
    
     adj_energy=np.linspace(min(energy),max(energy),num=1000)
     adj_winner = []
@@ -301,3 +302,33 @@ def mars_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True)
         plt.axis([min(energy),max(energy),0,1])
         plt.show()
     return winner[4]
+
+def test():
+    Wavelength = pd.read_excel('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\Test Data\\HiTp Sample Data.xlsx', usecols='A')
+    Absorption = pd.read_excel('C:\\Users\\hvidi\\Desktop\\TaucPlotGUI\\Test Data\\HiTp Sample Data.xlsx', usecols='B')
+    h = 6.62607015e-34
+    c = 299792458
+
+    XDATA = np.array([a[0] for a in Wavelength.values])
+    YDATA = np.array([a[0] for a in Absorption.values])
+
+    # Normalize YDATA
+    normY = max(YDATA)
+    YDATA = YDATA/normY
+
+    joules = (h*c)/(XDATA*1e-9)
+    energy = joules*6.242e18
+    TaucY = (YDATA)*energy
+
+    da = TaucY**2
+    # normD = max(da)
+    # da = da/normD
+
+    # ia = TaucY**(1/2)
+    # normI = max(ia)
+    # ia = ia/normI
+
+    absorption_coefficient = da
+    mars_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True)
+
+test()

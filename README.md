@@ -181,11 +181,11 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the BSD 3-Clause License. See `LICENSE.txt` for more information.
+MATLAB code distributed under the BSD 3-Clause License. See `LICENSE.txt` for more information. Please note that the MARS method used both in MATLAB and the accompanying python files exhibits public works from NREL/HTEM that is under Copyright 2017 Alliance for Sustainable Energy, LLC. See `LICENSE.txt` in the NREL-HTEM directory for more information. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTACT -->
+<!-- CONTACT --
 ## Contact
 
 SolarSpec - [SolarSpec Website](https://solarspec.ok.ubc.ca/) - vidihari@student.ubc.ca
