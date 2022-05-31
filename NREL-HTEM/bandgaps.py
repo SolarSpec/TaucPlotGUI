@@ -86,7 +86,7 @@ def segmentation_method(energy,absorption_coefficient,bg_type ='direct',show_gra
     spring_quotient = 1.0 #USE THIS TO ALTER THE NUMBER OF LINES SELECTED!
     try:
         position_linregress_vals_10_role = []
-        s = range(0,len(new_energy),len(new_energy)/10)
+        s = range(0,len(new_energy),round(len(new_energy)/10))
         for k in range(0,len(s)-1):
             slope, intercept, R_squared, x_intercept=linregress(new_energy[s[k]:s[k+1]],new_absorption_direct[s[k]:s[k+1]])
             if slope < 0 or x_intercept < 0 or x_intercept > 10 or R_squared<.75:
@@ -103,7 +103,7 @@ def segmentation_method(energy,absorption_coefficient,bg_type ='direct',show_gra
 
     try:
         position_linregress_vals_9_role = []
-        r = range(0,len(new_energy),len(new_energy)/9)
+        r = range(0,len(new_energy),round(len(new_energy)/9))
         for k in range(0,len(r)-1):
             slope, intercept, R_squared, x_intercept=linregress(new_energy[r[k]:r[k+1]],new_absorption_direct[r[k]:r[k+1]])
             if slope < 0 or x_intercept < 0 or x_intercept > 10 or R_squared<.75:
@@ -120,7 +120,7 @@ def segmentation_method(energy,absorption_coefficient,bg_type ='direct',show_gra
 
     try:
         position_linregress_vals_8_role = []
-        r = range(0,len(new_energy),len(new_energy)/8)
+        r = range(0,len(new_energy),round(len(new_energy)/8))
         for k in range(0,len(r)-1):
             slope, intercept, R_squared, x_intercept=linregress(new_energy[r[k]:r[k+1]],new_absorption_direct[r[k]:r[k+1]])
             if slope < 0 or x_intercept < 0 or x_intercept > 10 or R_squared<.75:
@@ -136,7 +136,7 @@ def segmentation_method(energy,absorption_coefficient,bg_type ='direct',show_gra
 
     try:
         position_linregress_vals_7_role = []
-        t = range(0,len(new_energy),len(new_energy)/7)
+        t = range(0,len(new_energy),round(len(new_energy)/7))
         for k in range(0,len(t)-1):
             slope, intercept, R_squared, x_intercept=linregress(new_energy[t[k]:t[k+1]],new_absorption_direct[t[k]:t[k+1]])
             if slope < 0 or x_intercept < 0 or x_intercept > 10 or R_squared<.75:
@@ -152,7 +152,7 @@ def segmentation_method(energy,absorption_coefficient,bg_type ='direct',show_gra
 
     try:
         position_linregress_vals_6_role = []
-        t = range(0,len(new_energy),len(new_energy)/6)
+        t = range(0,len(new_energy),round(len(new_energy)/6))
         for k in range(0,len(t)-1):
             slope, intercept, R_squared, x_intercept=linregress(new_energy[t[k]:t[k+1]],new_absorption_direct[t[k]:t[k+1]])
             if slope < 0 or x_intercept < 0 or x_intercept > 10 or R_squared<.75:
@@ -168,7 +168,7 @@ def segmentation_method(energy,absorption_coefficient,bg_type ='direct',show_gra
 
     try:
         position_linregress_vals_5_role = []
-        t = range(0,len(new_energy),len(new_energy)/5)
+        t = range(0,len(new_energy),round(len(new_energy)/5))
         for k in range(0,len(t)-1):
             slope, intercept, R_squared, x_intercept=linregress(new_energy[t[k]:t[k+1]],new_absorption_direct[t[k]:t[k+1]])
             if slope < 0 or x_intercept < 0 or x_intercept > 10 or R_squared<.75:
@@ -329,6 +329,6 @@ def test():
     # ia = ia/normI
 
     absorption_coefficient = da
-    mars_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True)
+    segmentation_method(energy,absorption_coefficient,bg_type ='direct',show_graph=True)
 
 test()

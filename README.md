@@ -8,8 +8,6 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -20,7 +18,7 @@
 <h3 align="center">Tauc Plot GUI</h3>
 
   <p align="center">
-    A Graphical User Interface for calculating bandgap energies and visualizing Direct Allowed and Indirect Allowed transition Tauc plots
+    A Graphical User Interface for calculating band gap energies and visualizing Tauc plots for direct allowed and indirect allowed transitions
     <br />
     <a href="https://github.com/SolarSpec/TaucPlotGUI"><strong>Explore the docs »</strong></a>
     <br />
@@ -32,8 +30,6 @@
     <a href="https://github.com/SolarSpec/TaucPlotGUI/issues">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -67,7 +63,9 @@
 ## About The Project
 
 [![Tauc Screenshot][product-screenshot]](https://solarspec.ok.ubc.ca/)
-An interactive GUI that allows for an input of absorption data to yield indirect and direct transition Tauc plots, giving subsequent bandgap energies
+An interactive GUI that allows for an input of absorption data to yield direct and indirect transition Tauc plots, giving subsequent band gap energies corresponding to the data. 
+There are three possible methods for calculating these band gap values which include: Santosh Newhouse Gregoire (SNG), Multivariate Adaptive Regression Spline 
+(MARS) and Segmentation methods.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -93,20 +91,19 @@ To begin using this app is very simple. Just verify you have the necessary prequ
 Make sure MATLAB is installed. It is available for download in the Software Distribution section under the Help tab after you log into [Canvas.](https://canvas.ubc.ca/)
 Click on the "Add-Ons" dropdown menu of your MATLAB Home screen. Then click on "Manage Add-Ons" and ensure you have the Image Processing Toolbox and the Signal Processing Toolbox. If not, click on "Get Add-Ons" button instead and search for the aforementioned products.
 
-
 ### Installation
 
 1. Clone the repo to your PC
    ```sh
    git clone https://github.com/SolarSpec/TaucPlotGUI.git
    ```
-2. Install the application 
+2. Now enter the repository and install the application in MATLAB
    ```
-   Click on the .mlappinstall file in your repository to open and install in MATLAB
+   Click on the .mlappinstall file in your repository
    ```
-3. Browse the APPS header
+3. Browse the APPS header and click on the drop down.
    ```
-   You will find the recently installed application and can add it to your favourites
+   You will find the recently installed application under 'MY APPS' and can add it to your favourites
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -116,47 +113,57 @@ Click on the "Add-Ons" dropdown menu of your MATLAB Home screen. Then click on "
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Expert Scientist Guidelines for Band Gap Estimation:
-If multiple band gaps are observed, estimate band gap using the Tauc regions that explains 
-higher proportion of Tauc property change.
+### **Santosh Newhouse Gregoire Method (SNG)**
+This method uses a baseline linear segment and the desired Tauc region linear segment to calculate the band gap energy at the crossing of these two lines.
+The abscissa is then used to determine the energy values in eV.
+  
+_Expert Scientist Guidelines for Band Gap Estimation:_ </br>
+If multiple band gaps are observed, estimate band gap using the Tauc regions that explains higher proportion of Tauc property change.
+In cases where a clear baseline is not observed but a trend for transition between the baseline and the absorption tail is observed, estimate band gap using best approximation of baseline.
+Do not estimate a band gap when neither a clear baseline nor a trend for transition between the baseline and the absorption tail are observed.
+Do not estimate band gap when only a lower limit of the band gap energy can be determined (due to the absorption transient extending beyond the high-energy limit of the spectrometer).
 
+<div class="row" style="text-align:center">
+  <img src="TaucPlotGUI_resources/SNGTest.png" alt="SNG" height="600" width="920">
+</div>
 
-In cases where a clear baseline is not observed but a trend for transition between the baseline 
-and the absorption tail is observed, estimate band gap using best approximation of baseline.
+</br>
 
+### **Multivariate Adaptive Regression Spline Method (MARS)**
+This method currently uses the desired Tauc region linear segment with the axis crossing to calculate the band gap energy. This linear segment is determined
+by a weighting expression.
 
-Do not estimate a band gap when neither a clear baseline nor a trend for transition between the 
-baseline and the absorption tail are observed.
+<div class="row" style="text-align:center">
+  <img src="TaucPlotGUI_resources/MARSTest.png" alt="MARS" height="600" width="920">
+</div>
 
+</br>
 
-Do not estimate band gap when only a lower limit of the band gap energy can be determined (due 
-to the absorption transient extending beyond the high-energy limit of the spectrometer).
+### **Segmentation Method**
+This method currently uses the desired Tauc region linear segment with the axis crossing to calculate the band gap energy.  
+  
+<div class="row" style="text-align:center">
+  <img src="TaucPlotGUI_resources/SegmentationTest.png" alt="Seg" height="600" width="920">
+</div>
 
-<!-- Here is a simple example of the app used on a small dataset. The filtering is turned on and we'd like to export all the kinetics data by clicking the "Export CSV Data" button. We can view where the file was saved in the text on the left panel and can then open the CSV file to view the data.
+</br>
 
-_Please note that the bottom of each CSV contains an extra row of information attributed to the BackgroundLevel data of each TDMS file. This is simply a convention to carry this data if it is loaded back into the PIAS app. If one does not intend to load it back into the app, you may delete this row or store the variables somewhere else in the CSV as to not lose it for future use._
-
-  <div class="row">
-    <img src="PIASpectra_resources/ExportButton.png" alt="Export">
-  </div>
-  <div class="row" style="float:left">
-    <img src="PIASpectra_resources/TopCSV.png" alt="Top" style="width:50%;height:50%;padding: 5px"><img src="PIASpectra_resources/BottomCSV.png" alt="Bottom" style="width:50%;height:50%;padding: 5px">
-  </div>
-
-
-_For more information on data filtering and decimation, please refer to the [Documentation](https://www.mathworks.com/help/signal/ref/decimate.html#d123e21788)_ -->
+_For more information on these methods and algorithms, please refer to the paper [Automated algorithms for band gap analysis from optical absorption spectra](https://doi.org/10.1016/j.md.2018.04.003) by Marcus Schwarting, Sebastian Siola, Kevin Talley, Andriy Zakutayev, and Caleb Phillips_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [X] Plot absorbtion vs. wavelength
-  - [X] Use ROI lines to cut data at certain wavelengths
+- [X] Plot Absorbtion or T-R vs. Wavelength
+  - [X] Use ROI lines to cut data at specified wavelengths
 - [X] Calculate subsequent DA and IA data
 - [X] Plot and fit DA and IA Tauc plots
-- [X] Calculate subsequent bandgap energies
-- [X] View possible issues with fit through code table
+- [X] Calculate desired band gap energies
+- [X] Use various methods to determine band gap energies
+  - [X] View possible issues with fit through code table (SNG)
+
+</br>
 
 See the [open issues](https://github.com/SolarSpec/TaucPlotGUI/issues) for a full list of proposed features (and known issues).
 
@@ -185,7 +192,7 @@ MATLAB code distributed under the BSD 3-Clause License. See `LICENSE.txt` for mo
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTACT --
+<!-- CONTACT -->
 ## Contact
 
 SolarSpec - [SolarSpec Website](https://solarspec.ok.ubc.ca/) - vidihari@student.ubc.ca
@@ -198,7 +205,10 @@ Project Link: [https://github.com/SolarSpec/TaucPlotGUI](https://github.com/Sola
 ## Acknowledgments
 
 * [Group Leader - Dr. Robert Godin](https://solarspec.ok.ubc.ca/people/)
+* [Group Coder - Haris Vidimlic](https://solarspec.ok.ubc.ca/people/)
 * [Santosh Suram](https://pubs.acs.org/doi/abs/10.1021/acscombsci.6b00053)
+* [Marcus Schwarting](https://doi.org/10.1016/j.md.2018.04.003)
+* [Caleb Phillips](https://doi.org/10.1016/j.md.2018.04.003)
 * [The Entire SolarSpec Team](https://solarspec.ok.ubc.ca/people/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>

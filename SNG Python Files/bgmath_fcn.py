@@ -31,7 +31,6 @@ def residuals(params,xdata,ydata):
 #from low value prior to band gap to higher values...The noise at very high energy levels usually having high absorbance will not 
 #effect the quality of the result a lot)
 
-   
 #params: zeroth index corresponds to the yfit value at x=x0. Next num_knots indices correspond to the knot positions. Next num_knots-1 indices correspond
 #to slopes for the linear regions.  Piecewise linear addition to obtain the value of fitdata at a specific value of x. 
 def linpiecewise(params,x):
@@ -42,7 +41,6 @@ def linpiecewise(params,x):
         fitdata+=params[num_knots+loc]*(x>=params[loc])*(np.min(np.array([np.ones(np.shape(x))*params[loc+1],x]),axis=0)-params[loc])
     return fitdata    
     
-
 #xorder: if loc in data represents smaller value of energy to higher value of energy then xorder is increasing otherwise decreasing
 #first constraint in cons is to ensure minimum knot distance min_knotdist. Second equality constraint indicates that the first and the last knot are fixed to the first and last values of x
 #Initially knot locations are evenly spread out between xvalues of interest and all slopes are set to zero. tolerance is the tolerance for convergence of linear properties.
@@ -267,12 +265,9 @@ min_finseglength,min_bgTP_finseg_diff ,min_bgfinalseglength,bgtyp):
     
     fomd['bgcode0_only']=fomd['bg_0'] if len(bg)==1 and fomd['bgcode_0']==0 else np.NaN
     return [linfitd,fomd]
-    
-
-    
+     
 def identifypeaks(data,typ,abs_minallowedslope,max_allowed_2ndderiv):
     return len(np.where(np.logical_and((np.abs(data[typ+'_2ndderiv'])>=max_allowed_2ndderiv),(np.abs(data[typ+'_1stderiv'])<=abs_minallowedslope)))[0])>0
-
 
 def runuvvis(data,inputvars):
 
@@ -391,3 +386,6 @@ datad = dict([('hv',energy),('DA',da),('IA',ia)])
 plt.plot(energy,da)
 plt.plot(energy,ia)
 runuvvis(datad,inputparmasd)
+# plt.plot(energy,datad['DA_linfit'])
+# plt.plot(energy,datad['IA_linfit'])
+tst
