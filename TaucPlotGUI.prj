@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="2427891215" file="C:\Users\hvidi\Desktop\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="741274780" file="C:\Users\hvidi\Desktop\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
     <param.appname>TaucPlotGUI</param.appname>
     <param.authnamewatermark>Haris Vidimlic, Santosh</param.authnamewatermark>
     <param.email>vidihari@student.ubc.ca</param.email>
@@ -8,22 +8,25 @@
     <param.icons />
     <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct allowed and indirect allowed transitions</param.summary>
     <param.description />
-    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tp7fcdb620_aa57_446b_8192_c4883b7254f4.png</param.screenshot>
+    <param.screenshot>${PROJECT_ROOT}\TaucPlotGUI_resources\Screenshot.png</param.screenshot>
     <param.version>1.0</param.version>
     <param.products.name>
       <item>MATLAB</item>
       <item>Curve Fitting Toolbox</item>
       <item>Image Processing Toolbox</item>
+      <item>Signal Processing Toolbox</item>
     </param.products.name>
     <param.products.id>
       <item>1</item>
       <item>60</item>
       <item>17</item>
+      <item>8</item>
     </param.products.id>
     <param.products.version>
       <item>9.11</item>
       <item>3.6</item>
       <item>11.4</item>
+      <item>8.7</item>
     </param.products.version>
     <param.platforms />
     <param.output>${PROJECT_ROOT}</param.output>
