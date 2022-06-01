@@ -1,14 +1,14 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="2539883317" file="C:\Users\hvidi\Desktop\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="2427891215" file="C:\Users\hvidi\Desktop\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
     <param.appname>TaucPlotGUI</param.appname>
-    <param.authnamewatermark>Vidimlic, Suram, Schwarting, Phillips</param.authnamewatermark>
+    <param.authnamewatermark>Haris Vidimlic, Santosh</param.authnamewatermark>
     <param.email>vidihari@student.ubc.ca</param.email>
     <param.company>SolarSpec</param.company>
     <param.icon />
     <param.icons />
     <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct allowed and indirect allowed transitions</param.summary>
     <param.description />
-    <param.screenshot>${PROJECT_ROOT}\TaucPlotGUI_resources\Screenshot.png</param.screenshot>
+    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tp7fcdb620_aa57_446b_8192_c4883b7254f4.png</param.screenshot>
     <param.version>1.0</param.version>
     <param.products.name>
       <item>MATLAB</item>
@@ -41,17 +41,15 @@
     </fileset.main>
     <fileset.depfun>
       <file>C:\Users\hvidi\Desktop\DLSmultiAverage\Chang's App\images\logo.png</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresbuild.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresdel.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\areseq.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresinfo.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresparams.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresparams2.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\arespredict.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\private\createbasisfunction.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\private\findsideknots.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\private\getbfstr.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\Test Data\TestData.mat</file>
+      <file>${PROJECT_ROOT}\ARESLab\aresbuild.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\areseq.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\aresparams.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\aresparams2.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\arespredict.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\private\createbasisfunction.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\private\findsideknots.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\private\getbfstr.m</file>
+      <file>${PROJECT_ROOT}\plist.mat</file>
     </fileset.depfun>
     <fileset.resources />
     <fileset.package />
