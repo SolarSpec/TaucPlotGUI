@@ -8,7 +8,7 @@
     <param.icons />
     <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct allowed and indirect allowed transitions</param.summary>
     <param.description />
-    <param.screenshot>${PROJECT_ROOT}\TaucPlotGUI_resources\Screenshot.png</param.screenshot>
+    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tpb07cada2_8f4b_4375_a01f_3299a2c65d30.png</param.screenshot>
     <param.version>1.0</param.version>
     <param.products.name>
       <item>MATLAB</item>
