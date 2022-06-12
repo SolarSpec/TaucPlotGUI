@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="2087840311" file="C:\Users\hvidi\Desktop\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="4221571847" file="C:\Users\hvidi\Desktop\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
     <param.appname>TaucPlotGUI</param.appname>
     <param.authnamewatermark>Haris Vidimlic, Santosh</param.authnamewatermark>
     <param.email>vidihari@student.ubc.ca</param.email>
@@ -8,7 +8,7 @@
     <param.icons />
     <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct allowed and indirect allowed transitions</param.summary>
     <param.description />
-    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tpc76c9ac5_845f_481c_a65a_32f626b77231.png</param.screenshot>
+    <param.screenshot>${PROJECT_ROOT}\TaucPlotGUI_resources\Screenshot.png</param.screenshot>
     <param.version>1.0</param.version>
     <param.products.name>
       <item>MATLAB</item>
