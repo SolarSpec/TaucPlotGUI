@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="4221571847" file="C:\Users\hvidi\Desktop\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="163110868" file="C:\Users\hvidi\Desktop\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
     <param.appname>TaucPlotGUI</param.appname>
     <param.authnamewatermark>Haris Vidimlic, Santosh</param.authnamewatermark>
     <param.email>vidihari@student.ubc.ca</param.email>
@@ -8,7 +8,7 @@
     <param.icons />
     <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct allowed and indirect allowed transitions</param.summary>
     <param.description />
-    <param.screenshot>${PROJECT_ROOT}\TaucPlotGUI_resources\Screenshot.png</param.screenshot>
+    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tpd320c7e7_d57a_491a_be00_21096e1db9b7.png</param.screenshot>
     <param.version>1.0</param.version>
     <param.products.name>
       <item>MATLAB</item>
@@ -23,10 +23,10 @@
       <item>8</item>
     </param.products.id>
     <param.products.version>
-      <item>9.11</item>
-      <item>3.6</item>
-      <item>11.4</item>
-      <item>8.7</item>
+      <item>9.12</item>
+      <item>3.7</item>
+      <item>11.5</item>
+      <item>9.0</item>
     </param.products.version>
     <param.platforms />
     <param.output>${PROJECT_ROOT}</param.output>
@@ -43,16 +43,16 @@
       <file>${PROJECT_ROOT}\UniversalTaucPlot.mlapp</file>
     </fileset.main>
     <fileset.depfun>
-      <file>C:\Users\hvidi\Desktop\DLSmultiAverage\Chang's App\images\logo.png</file>
-      <file>${PROJECT_ROOT}\ARESLab\aresbuild.m</file>
-      <file>${PROJECT_ROOT}\ARESLab\areseq.m</file>
-      <file>${PROJECT_ROOT}\ARESLab\aresparams.m</file>
-      <file>${PROJECT_ROOT}\ARESLab\aresparams2.m</file>
-      <file>${PROJECT_ROOT}\ARESLab\arespredict.m</file>
-      <file>${PROJECT_ROOT}\ARESLab\private\createbasisfunction.m</file>
-      <file>${PROJECT_ROOT}\ARESLab\private\findsideknots.m</file>
-      <file>${PROJECT_ROOT}\ARESLab\private\getbfstr.m</file>
-      <file>${PROJECT_ROOT}\File Exchange\line_intersection.m</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TAMviewer\Icons\Logo.png</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresbuild.m</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\areseq.m</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresparams.m</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresparams2.m</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\arespredict.m</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\private\createbasisfunction.m</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\private\findsideknots.m</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\private\getbfstr.m</file>
+      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\File Exchange\line_intersection.m</file>
       <file>${PROJECT_ROOT}\plist.mat</file>
     </fileset.depfun>
     <fileset.resources />
@@ -62,7 +62,7 @@
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2021b</root>
+      <root>C:\Program Files\MATLAB\R2022a</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
         <toolbox name="embeddedcoder" />
