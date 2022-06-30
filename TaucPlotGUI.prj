@@ -1,14 +1,14 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="163110868" file="C:\Users\hvidi\Desktop\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="1802849006" file="C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
     <param.appname>TaucPlotGUI</param.appname>
     <param.authnamewatermark>Haris Vidimlic, Santosh</param.authnamewatermark>
     <param.email>vidihari@student.ubc.ca</param.email>
     <param.company>SolarSpec</param.company>
     <param.icon />
     <param.icons />
-    <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct allowed and indirect allowed transitions</param.summary>
+    <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct  and indirect allowed transitions</param.summary>
     <param.description />
-    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tpd320c7e7_d57a_491a_be00_21096e1db9b7.png</param.screenshot>
+    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tp96f339fb_a3c2_4d40_8994_4db65a7c20e0.png</param.screenshot>
     <param.version>1.0</param.version>
     <param.products.name>
       <item>MATLAB</item>
@@ -43,22 +43,22 @@
       <file>${PROJECT_ROOT}\UniversalTaucPlot.mlapp</file>
     </fileset.main>
     <fileset.depfun>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TAMviewer\Icons\Logo.png</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresbuild.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\areseq.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresparams.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\aresparams2.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\arespredict.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\private\createbasisfunction.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\private\findsideknots.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\ARESLab\private\getbfstr.m</file>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\File Exchange\line_intersection.m</file>
       <file>${PROJECT_ROOT}\plist.mat</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\Chang's App\images\logo.png</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\aresbuild.m</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\areseq.m</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\aresparams.m</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\aresparams2.m</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\arespredict.m</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\private\createbasisfunction.m</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\private\findsideknots.m</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\private\getbfstr.m</file>
+      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\File Exchange\line_intersection.m</file>
     </fileset.depfun>
     <fileset.resources />
     <fileset.package />
     <build-deliverables>
-      <file location="C:\Users\hvidi\Desktop" name="TaucPlotGUI" optional="false">C:\Users\hvidi\Desktop\TaucPlotGUI</file>
+      <file location="C:\Users\hvidi\Desktop\Platform-Repo" name="TaucPlotGUI" optional="false">C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI</file>
     </build-deliverables>
     <workflow />
     <matlab>
