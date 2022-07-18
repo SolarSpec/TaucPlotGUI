@@ -57,19 +57,15 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 [![Tauc Screenshot][product-screenshot]](https://solarspec.ok.ubc.ca/)
-An interactive GUI that allows for an input of absorption data to yield direct and indirect transition Tauc plots, giving subsequent band gap energies corresponding to the data. 
-There are three possible methods for calculating these band gap values which include: Santosh Newhouse Gregoire (SNG), Multivariate Adaptive Regression Spline 
+An interactive GUI that allows for an input of absorption data to yield direct and indirect transition Tauc plots, giving subsequent band gap energies corresponding to the data.
+There are three possible methods for calculating these band gap values which include: Santosh Newhouse Gregoire (SNG), Multivariate Adaptive Regression Spline
 (MARS) and Segmentation methods.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -79,8 +75,6 @@ There are three possible methods for calculating these band gap values which inc
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -89,33 +83,44 @@ To begin using this app is very simple. Just verify you have the necessary prequ
 ### Prerequisites
 
 Make sure MATLAB is installed. It is available for download in the Software Distribution section under the Help tab after you log into [Canvas.](https://canvas.ubc.ca/)
-Click on the "Add-Ons" dropdown menu of your MATLAB Home screen. Then click on "Manage Add-Ons" and ensure you have the Image Processing Toolbox and the Signal Processing Toolbox. If not, click on "Get Add-Ons" button instead and search for the aforementioned products.
+Click on the "Add-Ons" dropdown menu of your MATLAB Home screen. Then click on "Manage Add-Ons" and ensure you have the Image Processing Toolbox and the Signal Processing Toolbox. If not, click on the "Get Add-Ons" button instead and search for the aforementioned products.
 
 ### Installation
 
 1. Clone the repo to your PC
+
    ```sh
    git clone https://github.com/SolarSpec/TaucPlotGUI.git
    ```
+
 2. Now enter the repository and install the application in MATLAB
+
    ```
    Click on the .mlappinstall file in your repository
    ```
+
 3. Browse the APPS header and click on the drop down.
+
    ```
    You will find the recently installed application under 'MY APPS' and can add it to your favourites
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+To begin, the user can load either absoprtion or reflectance data using the corresponding "Load Abs Data" and "Load Reflectance Data" buttons on the left panel. Initially, the app will populate the top "Absorption Spectra" plot with Intensity vs. Wavelength (nm) while overlaying ROI lines that allows the user to determine the fit limits of the data. If the data needs cropping to calculate proper Tauc plot ranges then the user can physically slide the ROI lines or update the limit fields on the right panel to achieve this. Furthermore, there are three possible fitting methods selectable at the top of this panel. These methods determine the fit and the resulting band gap values in various ways described below.
+
+After the desired methods are chosen, the user can then begin determining the band gap values by clicking the "Start Fit" button. This will populate the remaining Direct and Indirect Transition Tauc plots in the middle panel; displaying either squared or rooted Absorption Coefficient*Energy respectively vs. Energy (eV). Once completed, the app will output the determined band gap values in the left panel in the order of [SNG MARS Segmentation]. If SNG is a selected method, it will output Goodness of Fit codes labelled "FOMD Codes" below the desired band gap values. These codes tell the user whether or not the fitting was successful and if not, what went wrong by comparing with the FOMD table on the right panel.
+
+Finally, the user will now have the option to export the data by clicking the "Export Data" button on the right panel (unless the selected fitting methods are changed, in which the user will need to re-fit the data). Furthermore, the "Baseline Index" edit field will now be editable and it allows the user to select which linear segment of the baseline region will the line snap to, specifically only for the SNG and Segmentation methods.
+
+<br />
+
 ### **Santosh Newhouse Gregoire Method (SNG)**
-This method uses a baseline linear segment and the desired Tauc region linear segment to calculate the band gap energy at the crossing of these two lines.
-The abscissa is then used to determine the energy values in eV.
+
+This method uses a baseline linear segment and the desired Tauc region linear segment to calculate the band gap energy at the crossing of these two lines. The abscissa is then used to determine the energy values in eV.
   
 _Expert Scientist Guidelines for Band Gap Estimation:_ </br>
 If multiple band gaps are observed, estimate band gap using the Tauc regions that explains higher proportion of Tauc property change.
@@ -130,8 +135,8 @@ Do not estimate band gap when only a lower limit of the band gap energy can be d
 </br>
 
 ### **Multivariate Adaptive Regression Spline Method (MARS)**
-This method currently uses the desired Tauc region linear segment with the axis crossing to calculate the band gap energy. This linear segment is determined
-by a weighting expression.
+
+This method initially used the desired Tauc region linear segment with the axis crossing to calculate the band gap energy but has been updated to find the baseline segment and instead use the abscissa. These linear segments are determined by a weighting expression.
 
 <div class="row" style="text-align:center">
   <img src="TaucPlotGUI_resources/MARSTest.png" alt="MARS" height="600" width="920">
@@ -140,7 +145,8 @@ by a weighting expression.
 </br>
 
 ### **Segmentation Method**
-This method currently uses the desired Tauc region linear segment with the axis crossing to calculate the band gap energy.  
+
+This method initially used the desired Tauc region linear segment with the axis crossing to calculate the band gap energy but has been updated to find the baseline segment and instead use the abscissa. This method draws multiple Tauc regions through linear regression and iterating various step sizes, then averages among them to find the best region.
   
 <div class="row" style="text-align:center">
   <img src="TaucPlotGUI_resources/SegmentationTest.png" alt="Seg" height="600" width="920">
@@ -155,13 +161,13 @@ _For more information on these methods and algorithms, please refer to the paper
 <!-- ROADMAP -->
 ## Roadmap
 
-- [X] Plot Absorbtion or T-R vs. Wavelength
-  - [X] Use ROI lines to cut data at specified wavelengths
-- [X] Calculate subsequent DA and IA data
-- [X] Plot and fit DA and IA Tauc plots
-- [X] Calculate desired band gap energies
-- [X] Use various methods to determine band gap energies
-  - [X] View possible issues with fit through code table (SNG)
+* [X] Plot Absorbtion or T-R vs. Wavelength
+  * [X] Use ROI lines to cut data at specified wavelengths
+* [X] Calculate subsequent DA and IA data
+* [X] Plot and fit DA and IA Tauc plots
+* [X] Calculate desired band gap energies
+* [X] Use various methods to determine band gap energies
+  * [X] View possible issues with fit through code table (SNG)
 
 </br>
 
