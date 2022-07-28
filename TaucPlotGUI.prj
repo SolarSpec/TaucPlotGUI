@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="3446802498" file="C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="545746314" file="C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
     <param.appname>TaucPlotGUI</param.appname>
     <param.authnamewatermark>Haris Vidimlic, Santosh</param.authnamewatermark>
     <param.email>vidihari@student.ubc.ca</param.email>
@@ -8,8 +8,8 @@
     <param.icons />
     <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct  and indirect allowed transitions</param.summary>
     <param.description />
-    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tpd2e5e5f7_bf4f_4138_89ae_017962ae183d.png</param.screenshot>
-    <param.version>1.0</param.version>
+    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tpfa895c1b_f7d5_4afa_8f05_28c9e4bb2aee.png</param.screenshot>
+    <param.version>1.5</param.version>
     <param.products.name>
       <item>MATLAB</item>
       <item>Curve Fitting Toolbox</item>
@@ -35,7 +35,6 @@
       <param.icon />
       <param.icons />
       <param.description />
-      <param.version />
       <param.platforms />
       <param.output />
     </unset>
