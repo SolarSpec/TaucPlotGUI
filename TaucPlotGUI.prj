@@ -1,15 +1,15 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="545746314" file="C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI\TaucPlotGUI.prj" location="C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="3030956786" file="C:\Users\HP\Downloads\TaucPlotGUI-main\TaucPlotGUI.prj" location="C:\Users\HP\Downloads\TaucPlotGUI-main" name="TaucPlotGUI" target="target.mlapps" target-name="Package App">
     <param.appname>TaucPlotGUI</param.appname>
     <param.authnamewatermark>Haris Vidimlic, Santosh</param.authnamewatermark>
     <param.email>vidihari@student.ubc.ca</param.email>
     <param.company>SolarSpec</param.company>
     <param.icon />
     <param.icons />
-    <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct  and indirect allowed transitions</param.summary>
+    <param.summary>A GUI for calculating band gap energies and visualizing Tauc plots for direct and indirect allowed transitions</param.summary>
     <param.description />
-    <param.screenshot>C:\Users\hvidi\AppData\Local\Temp\tpfa895c1b_f7d5_4afa_8f05_28c9e4bb2aee.png</param.screenshot>
-    <param.version>1.5</param.version>
+    <param.screenshot>C:\Users\HP\AppData\Local\Temp\tp886d665e_8150_4ab3_a05b_3842fdd1d895.png</param.screenshot>
+    <param.version>1.6</param.version>
     <param.products.name>
       <item>MATLAB</item>
       <item>Curve Fitting Toolbox</item>
@@ -23,10 +23,10 @@
       <item>8</item>
     </param.products.id>
     <param.products.version>
-      <item>9.12</item>
-      <item>3.7</item>
-      <item>11.5</item>
-      <item>9.0</item>
+      <item>24.1</item>
+      <item>24.1</item>
+      <item>24.1</item>
+      <item>24.1</item>
     </param.products.version>
     <param.platforms />
     <param.output>${PROJECT_ROOT}</param.output>
@@ -42,26 +42,26 @@
       <file>${PROJECT_ROOT}\UniversalTaucPlot.mlapp</file>
     </fileset.main>
     <fileset.depfun>
-      <file>C:\Users\hvidi\Desktop\Platform-Repo\TAMviewer\Icons\Logo.png</file>
+      <file>${PROJECT_ROOT}\ARESLab\aresbuild.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\areseq.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\aresparams.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\aresparams2.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\arespredict.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\private\createbasisfunction.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\private\findsideknots.m</file>
+      <file>${PROJECT_ROOT}\ARESLab\private\getbfstr.m</file>
+      <file>${PROJECT_ROOT}\File Exchange\line_intersection.m</file>
       <file>${PROJECT_ROOT}\plist.mat</file>
-      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\aresbuild.m</file>
-      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\areseq.m</file>
-      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\aresparams.m</file>
-      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\aresparams2.m</file>
-      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\arespredict.m</file>
-      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\private\createbasisfunction.m</file>
-      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\private\findsideknots.m</file>
-      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\ARESLab\private\getbfstr.m</file>
-      <file>C:\Users\hvidi\The University Of British Columbia\Godin, Robert - Group space\Haris Vidimlic\TaucPlotGUI\File Exchange\line_intersection.m</file>
+      <file>${PROJECT_ROOT}\TaucPlotGUI_resources\logo.png</file>
     </fileset.depfun>
     <fileset.resources />
     <fileset.package />
     <build-deliverables>
-      <file location="C:\Users\hvidi\Desktop\Platform-Repo" name="TaucPlotGUI" optional="false">C:\Users\hvidi\Desktop\Platform-Repo\TaucPlotGUI</file>
+      <file location="C:\Users\HP\Downloads" name="TaucPlotGUI-main" optional="false">C:\Users\HP\Downloads\TaucPlotGUI-main</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022a</root>
+      <root>C:\Program Files\MATLAB\R2024a</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
         <toolbox name="embeddedcoder" />
